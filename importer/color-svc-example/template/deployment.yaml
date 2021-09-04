@@ -1,0 +1,54 @@
+# == export: resource-basic / begin ==
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-svc
+# == export: resource-basic / end ==
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      # == export: version-and-label / begin ==
+      app.kubernetes.io/name: color-svc
+      app.kubernetes.io/version: v1
+      # == export: version-and-label / end ==
+  template:
+    metadata:
+      labels:
+        # Same label should be used as above
+        app.kubernetes.io/name: color-svc
+        app.kubernetes.io/version: v1
+
+    spec:
+      # == export: basic-spec / begin ==
+      serviceAccountName: color-svc
+      containers:
+        - image: docker.io/rytswd/color-svc:latest
+          name: color-svc
+          command:
+            - color-svc
+          ports:
+            - containerPort: 8800
+          # == export: basic-spec / end ==
+
+          env:
+            # == export: standard-envs / begin ==
+            - name: ENABLE_DELAY
+              value: "true"
+            - name: DELAY_DURATION_MILLISECOND
+              value: "500"
+            - name: ENABLE_CORS
+              value: "true"
+            # == export: standard-envs / end ==
+
+          # == export: resource-requirements / begin ==
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 30m
+              memory: 30Mi
+          # == export: resource-requirements / end ==
+

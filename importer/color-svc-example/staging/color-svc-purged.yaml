@@ -1,0 +1,38 @@
+---
+# == imptr: k8s-svc / begin from: ../template/svc.yaml#1~ ==
+# == imptr: k8s-svc / end ==
+---
+# == imptr: deployment-basic / begin from: ../template/deployment.yaml#[resource-basic] ==
+# == imptr: deployment-basic / end ==
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      # == imptr: match-label-version / begin from: ../template/deployment.yaml#[version-and-label] indent: align ==
+      # == imptr: match-label-version / end ==
+  template:
+    metadata:
+      labels:
+        # == imptr: template-label-version / begin from: ../template/deployment.yaml#[version-and-label] indent: align ==
+        # == imptr: template-label-version / end ==
+
+    spec:
+      # == imptr: basic-spec / begin from: ../template/deployment.yaml#[basic-spec] ==
+          # == imptr: basic-spec / end ==
+
+          env:
+            # == imptr: standard-envs / begin from: ../template/deployment.yaml#[standard-envs] ==
+            # == imptr: standard-envs / end ==
+            - name: DISABLE_RED
+              value: "true"
+            - name: DISABLE_GREEN
+              value: "true"
+            - name: DISABLE_BLUE
+              value: "false"
+            - name: DISABLE_YELLOW
+              value: "true"
+
+          # == imptr: resource-requirements / begin from: ../template/deployment.yaml#[resource-requirements] ==
+          # == imptr: resource-requirements / end ==
+

@@ -1,0 +1,25 @@
+---
+name: CI - Helm
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - helm/**
+
+jobs:
+  helm-template:
+    name: Run helm template
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Install Helm
+        run: brew install helm
+
+      - name: Run helm template
+        run: |
+          helm template ./helm/simple-chart -f ./helm/simple-chart/values-prod.yaml
+          helm template ./helm/simple-chart -f ./helm/simple-chart/values-staging.yaml

@@ -1,0 +1,27 @@
+# == imptr: basic-resources / begin from: ./basic-resources.yaml#1~ ==
+# == imptr: basic-resources / end ==
+
+# == imptr: helm-controller / begin from: ./helm-controller.yaml#1~ ==
+# == imptr: helm-controller / end ==
+
+# == imptr: image-automation-controller / begin from: ./image-related-controller.yaml#[image-automation]~ ==
+# == imptr: image-automation-controller / end ==
+
+# == imptr: image-reflector-controller / begin from: ./image-related-controller.yaml#[image-reflector]~ ==
+# == imptr: image-reflector-controller / end ==
+
+# == imptr: kustomize-controller / begin from: ./kustomize-controller.yaml#1~ ==
+# == imptr: kustomize-controller / end ==
+
+# == imptr: notification-controller / begin from: ./notification-controller.yaml#1~ ==
+# == imptr: notification-controller / end ==
+
+# == imptr: source-controller / begin from: ./source-controller.yaml#1~ ==
+# == imptr: source-controller / end ==
+
+# == imptr: webhook / begin from: ./webhook.yaml#1~ ==
+# == imptr: webhook / end ==
+
+# == imptr: other-resources / begin from: ./other-resources.yaml#1~ ==
+# == imptr: other-resources / end ==
+

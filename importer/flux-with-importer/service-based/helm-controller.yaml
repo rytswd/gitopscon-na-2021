@@ -1,0 +1,81 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/instance: flux-system
+  name: helm-controller
+  namespace: flux-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: flux-system
+    control-plane: controller
+  name: helm-controller
+  namespace: flux-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helm-controller
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+      labels:
+        app: helm-controller
+    spec:
+      containers:
+      - image: fluxcd/helm-controller:v0.11.2
+        args:
+        - --events-addr=http://notification-controller/
+        # == imptr: common-args / begin from: ./_deployment_template.yaml#[common-args] indent: align ==
+        - --watch-all-namespaces
+        - --log-level=info
+        - --log-encoding=json
+        - --enable-leader-election
+        # == imptr: common-args / end ==
+        env:
+        - name: RUNTIME_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - containerPort: 8080
+          name: http-prom
+        - containerPort: 9440
+          name: healthz
+          protocol: TCP
+        # == imptr: resource-setup / begin from: ./_deployment_template.yaml#[probe-and-resource] indent: align ==
+        name: manager
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: healthz
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: healthz
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        # == imptr: resource-setup / end ==
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: temp
+      serviceAccountName: helm-controller
+      terminationGracePeriodSeconds: 600
+      volumes:
+      - emptyDir: {}
+        name: temp

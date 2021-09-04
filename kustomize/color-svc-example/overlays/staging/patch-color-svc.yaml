@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-svc
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/rytswd/color-svc:latest
+          name: color-svc
+          env:
+            - name: DISABLE_RED
+              value: "true"
+            - name: DISABLE_GREEN
+              value: "true"
+            - name: DISABLE_BLUE
+              value: "false" # The same as default
+            - name: DISABLE_YELLOW
+              value: "true"

@@ -1,0 +1,21 @@
+# == imptr: namespace / begin from: ./namespace.yaml#1~ ==
+# == imptr: namespace / end ==
+
+# == imptr: crds / begin from: ./crd.yaml#1~ ==
+# == imptr: crds / end ==
+
+# == imptr: service-accounts / begin from: ./service-account.yaml#1~ ==
+# == imptr: service-accounts / end ==
+
+# == imptr: rbac / begin from: ./rbac.yaml#1~ ==
+# == imptr: rbac / end ==
+
+# == imptr: service / begin from: ./svc.yaml#1~ ==
+# == imptr: service / end ==
+
+# == imptr: deployment / begin from: ./deployment.yaml#1~ ==
+# == imptr: deployment / end ==
+
+# == imptr: network-policy / begin from: ./network-policy.yaml#1~ ==
+# == imptr: network-policy / end ==
+

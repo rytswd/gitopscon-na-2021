@@ -1,0 +1,25 @@
+---
+name: CI - Kustomize Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - kustomize/**
+
+jobs:
+  kustomize-build:
+    name: Run kustomize build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Install Kustomize
+        run: brew install kustomize
+
+      - name: Run kustomize build
+        run: |
+          kustomize build ./kustomize/resource-deletion/overlays/prod
+          kustomize build ./kustomize/resource-deletion/overlays/staging

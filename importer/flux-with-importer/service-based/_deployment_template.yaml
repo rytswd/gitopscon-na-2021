@@ -1,0 +1,28 @@
+commonArgs:
+  # == export: common-args / begin ==
+  - --watch-all-namespaces
+  - --log-level=info
+  - --log-encoding=json
+  - --enable-leader-election
+  # == export: common-args / end ==
+
+resource-and-probes:
+  # == export: probe-and-resource / begin ==
+  name: manager
+  imagePullPolicy: IfNotPresent
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: healthz
+  readinessProbe:
+    httpGet:
+      path: /readyz
+      port: healthz
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  # == export: probe-and-resource / end ==

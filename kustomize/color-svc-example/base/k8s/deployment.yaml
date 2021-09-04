@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: color-svc
+      app.kubernetes.io/version: v1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: color-svc
+        app.kubernetes.io/version: v1
+    spec:
+      serviceAccountName: color-svc
+      containers:
+        - image: docker.io/rytswd/color-svc:latest
+          name: color-svc
+          command:
+            - color-svc
+          ports:
+            - containerPort: 8800
+          env:
+            - name: ENABLE_DELAY
+              value: "true"
+            - name: DELAY_DURATION_MILLISECOND
+              value: "500"
+            - name: ENABLE_CORS
+              value: "true"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 30m
+              memory: 30Mi

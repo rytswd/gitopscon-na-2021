@@ -1,0 +1,65 @@
+# Example usage:
+# This part is not exported by a marker
+importer-update:
+  name: Importer Update
+  runs-on: ubuntu-latest
+  needs: comvent
+  if: always() && (
+    needs.comvent.outputs.run-importer-update != '' ||
+    needs.comvent.outputs.run-importer-update-file != '')
+
+  # == export: steps / begin ==
+  steps:
+    - name: Get PR ref from comment
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const prNum = context.payload.issue.number
+          const {data} = await github.pulls.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: prNum,
+          })
+
+          core.exportVariable('pr_head_ref', data.head.ref);
+
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ env.pr_head_ref }}
+        fetch-depth: 0
+        token: ${{ secrets.AUTOMATION_PAT }}
+
+    - name: Install Importer
+      run: brew install upsidr/tap/importer
+
+    - if: needs.comvent.outputs.run-importer-update != ''
+      name: Run Importer Update for all files
+      run: |
+        find . -name '*.md' -exec importer update {} \;
+        find . -name '*.yaml' -exec importer update {} \;
+
+    - if: needs.comvent.outputs.run-importer-update-file != ''
+      name: Run Importer Update for all files
+      run: |
+        importer update ${{ needs.chatops.outputs.run-importer-update-file }}
+
+    - name: Check for file change
+      run: |
+        git status --short
+        git diff-index --quiet HEAD || echo 'commit_needed=yes' >> $GITHUB_ENV
+
+    - if: env.commit_needed == 'yes'
+      name: Commit files
+      run: |
+        # For using github-actions bot email, use below.
+        # git config --local user.name "github-actions[bot]"
+        # git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Get user's ID via https://api.github.com/users/rytswd-stella
+        git config --local user.name "rytswd-stella"
+        git config --local user.email "89329736+rytswd-stella@users.noreply.github.com"
+
+        git add .
+        git commit -m "Run Importer Update via Comvent automation"
+        git push
+  # == export: steps / end ==
