@@ -153,10 +153,10 @@ git:
   # the public-keys which were used in the encryption using
   # `gpgKeys.secretName`.
   secret:
-    enabled: false
+    enabled: true
   # Global Git configuration See https://git-scm.com/docs/git-config for more details.
   config:
-    enabled: false
+    enabled: true
     secretName: ""
     data: ""
     # data: |
@@ -165,7 +165,7 @@ git:
 
 # If `true` SOPS support will be enabled
 sops:
-  enabled: false
+  enabled: true
 
 registry:
   # Period at which to check for updated images
@@ -200,7 +200,7 @@ registry:
     hostPath: /etc/kubernetes/azure.json
     secretName: ""
   dockercfg:
-    enabled: false
+    enabled: true
     secretName: ""
     configFileName: /dockercfg/config.json
 
@@ -299,17 +299,17 @@ extraEnvsFrom: []
 #       name: special-config
 
 prometheus:
-  enabled: false
+  enabled: true
   serviceMonitor:
     # Enables ServiceMonitor creation for the Prometheus Operator
-    create: false
+    create: true
     interval:
     scrapeTimeout:
     namespace:
     additionalLabels: {}
 
 syncGarbageCollection:
-  enabled: false
+  enabled: true
   dry: false
 
 # Enables manifest generation
