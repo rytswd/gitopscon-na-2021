@@ -33,15 +33,19 @@ dyff:
       run: |
         # Check Kustomize based files
         # !! NOTE !! : This setup assumes a lot about the directory structure.
-        kustomize_diff=$(git diff-index --name-only origin/main | grep kustomize | awk -F "/" '{printf "%s/%s\n", $1, $2}' | uniq || echo "")
-        if [[ $kustomize_diff != "" ]]; then
+        #              Also, if multiple directories are changed at once, this
+        #              setup will break.
+        kustomize_diff=$(git diff-index --name-only origin/main | grep -v .github | grep kustomize | awk -F "/" '{printf "%s/%s\n", $1, $2}' | uniq || echo "")
+        if [[ "$kustomize_diff" != "" ]]; then
           echo "kustomize_diff=$kustomize_diff" >> $GITHUB_ENV
         fi
 
         # Check Helm based files
         # !! NOTE !! : This setup assumes a lot about the directory structure.
-        helm_diff=$(git diff-index --name-only origin/main | grep helm | awk -F "/" '{printf "%s/%s\n", $1, $2}' | uniq || echo "")
-        if [[ $helm_diff != "" ]]; then
+        #              Also, if multiple directories are changed at once, this
+        #              setup will break.
+        helm_diff=$(git diff-index --name-only origin/main | grep -v .github | grep helm | awk -F "/" '{printf "%s/%s\n", $1, $2}' | uniq || echo "")
+        if [[ "$helm_diff" != "" ]]; then
           echo "helm_diff=$helm_diff" >> $GITHUB_ENV
           exit 0
         fi
