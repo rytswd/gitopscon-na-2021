@@ -1,4 +1,4 @@
-# == imptr: argo-install / begin from: https://github.com/argoproj/argo-cd/blob/v2.1.0/manifests/install.yaml#1~ ==
+# == imptr: argo-install / begin from: https://github.com/argoproj/argo-cd/blob/v2.1.2/manifests/install.yaml#1~ ==
 # This is an auto-generated file. DO NOT EDIT
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -3050,7 +3050,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /shared/argocd-dex
-        image: quay.io/argoproj/argocd:v2.1.0
+        image: quay.io/argoproj/argocd:v2.1.2
         imagePullPolicy: Always
         name: copyutil
         volumeMounts:
@@ -3225,7 +3225,7 @@ spec:
               key: reposerver.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v2.1.0
+        image: quay.io/argoproj/argocd:v2.1.2
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -3440,6 +3440,12 @@ spec:
               key: server.login.attempts.expiration
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_SERVER_STATIC_ASSETS
+          valueFrom:
+            configMapKeyRef:
+              key: server.staticassets
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_APP_STATE_CACHE_EXPIRATION
           valueFrom:
             configMapKeyRef:
@@ -3464,7 +3470,7 @@ spec:
               key: server.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v2.1.0
+        image: quay.io/argoproj/argocd:v2.1.2
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -3654,7 +3660,7 @@ spec:
               key: controller.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v2.1.0
+        image: quay.io/argoproj/argocd:v2.1.2
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
