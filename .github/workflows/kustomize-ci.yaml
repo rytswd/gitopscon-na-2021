@@ -21,5 +21,9 @@ jobs:
 
       - name: Run kustomize build
         run: |
-          kustomize build ./kustomize/resource-deletion/overlays/prod
-          kustomize build ./kustomize/resource-deletion/overlays/staging
+          while IFS= read -r -d '' file
+          do
+            kustomize_dir=$(dirname "$file")
+            echo "Running 'kustomize build' against '${kustomize_dir}' ..."
+            kustomize build "$kustomize_dir" > /dev/null && echo '  Success!'
+          done < <(find . -name 'kustomization.yaml' -print0)
