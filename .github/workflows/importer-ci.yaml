@@ -1,0 +1,32 @@
+---
+name: CI - Importer
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - importer/**
+
+jobs:
+  importer-update:
+    name: Run importer update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Install Importer
+        run: brew install upsidr/tap/importer
+
+      - name: Run Importer update against YAML files
+        run: |
+          find importer \
+            -name '*.yaml' \
+            ! -name '*-purged.yaml' \
+            ! -name '*.gen.yaml' \
+            -exec importer update {} \;
+      - name: Check if any change compared to the branch HEAD
+        run: |
+          git status --short
+          git diff-index --quiet HEAD
