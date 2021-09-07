@@ -74,7 +74,11 @@ jobs:
         name: Run Importer Update for all files
         run: |
           find . -name '*.md' -exec importer update {} \;
-          find . -name '*.yaml' -exec importer update {} \;
+          find importer \
+            -name '*.yaml' \
+            ! -name '*-purged.yaml' \
+            ! -name '*.gen.yaml' \
+            -exec importer update {} \;
   
       - if: needs.comvent.outputs.run-importer-update-file != ''
         name: Run Importer Update for all files
