@@ -9,10 +9,10 @@ commonArgs:
 commonEnvs:
   # == export: common-envs / begin ==
   env:
-    - name: RUNTIME_NAMESPACE
-      valueFrom:
-        fieldRef:
-          fieldPath: metadata.namespace
+  - name: RUNTIME_NAMESPACE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.namespace
   # == export: common-envs / end ==
 
 resource-and-probes:
