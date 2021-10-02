@@ -55,11 +55,13 @@ spec:
         - --log-encoding=json
         - --enable-leader-election
         # == imptr: common-args / end ==
+        # == imptr: common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        # == imptr: common-envs / end ==
         ports:
         - containerPort: 9090
           name: http

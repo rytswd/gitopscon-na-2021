@@ -30,30 +30,35 @@ spec:
         app: image-automation-controller
     spec:
       containers:
-      - args:
+      - image: fluxcd/image-automation-controller:v0.14.1
+        args:
         - --events-addr=http://notification-controller/
+        # == imptr: image-automation-common-args / begin from: ./_deployment_template.yaml#[common-args] indent: align ==
         - --watch-all-namespaces
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        # == imptr: image-automation-common-args / end ==
+        # == imptr: image-automation-common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: fluxcd/image-automation-controller:v0.14.1
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: healthz
-        name: manager
+        # == imptr: image-automation-common-envs / end ==
         ports:
         - containerPort: 8080
           name: http-prom
         - containerPort: 9440
           name: healthz
           protocol: TCP
+        # == imptr: image-automation-resource-setup / begin from: ./_deployment_template.yaml#[probe-and-resource] indent: align ==
+        name: manager
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: healthz
         readinessProbe:
           httpGet:
             path: /readyz
@@ -65,6 +70,7 @@ spec:
           requests:
             cpu: 100m
             memory: 64Mi
+        # == imptr: image-automation-resource-setup / end ==
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -112,30 +118,29 @@ spec:
         app: image-reflector-controller
     spec:
       containers:
-      - args:
+      - image: fluxcd/image-reflector-controller:v0.11.1
+        args:
         - --events-addr=http://notification-controller/
+        # == imptr: image-reflector-common-args / begin from: ./_deployment_template.yaml#[common-args] indent: align ==
         - --watch-all-namespaces
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        # == imptr: image-reflector-common-args / end ==
+        # == imptr: image-reflector-common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: fluxcd/image-reflector-controller:v0.11.1
+        # == imptr: image-reflector-common-envs / end ==
+        # == imptr: image-reflector-resource-setup / begin from: ./_deployment_template.yaml#[probe-and-resource] indent: align ==
+        name: manager
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /healthz
             port: healthz
-        name: manager
-        ports:
-        - containerPort: 8080
-          name: http-prom
-        - containerPort: 9440
-          name: healthz
-          protocol: TCP
         readinessProbe:
           httpGet:
             path: /readyz
@@ -147,6 +152,7 @@ spec:
           requests:
             cpu: 100m
             memory: 64Mi
+        # == imptr: image-reflector-resource-setup / end ==
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

@@ -1,4 +1,9 @@
+# == importer-skip-update ==
+
 # == imptr: basic-resources / begin from: ./basic-resources.yaml#1~ ==
+#
+# ℹ️ Basic resources contain namespace and CRDs.
+#
 # == imptr: basic-resources / end ==
 
 # == imptr: helm-controller / begin from: ./helm-controller.yaml#1~ ==
@@ -23,5 +28,8 @@
 # == imptr: webhook / end ==
 
 # == imptr: other-resources / begin from: ./other-resources.yaml#1~ ==
+#
+# ℹ️ Other resources contain network policy and RBAC related items.
+#    It may be better managed in separate files.
+#
 # == imptr: other-resources / end ==
-

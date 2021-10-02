@@ -6,6 +6,15 @@ commonArgs:
   - --enable-leader-election
   # == export: common-args / end ==
 
+commonEnvs:
+  # == export: common-envs / begin ==
+  env:
+    - name: RUNTIME_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+  # == export: common-envs / end ==
+
 resource-and-probes:
   # == export: probe-and-resource / begin ==
   name: manager
