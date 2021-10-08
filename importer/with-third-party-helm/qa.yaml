@@ -1,0 +1,18 @@
+# == importer-skip-update ==
+
+# Ref: https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+grafana:
+  # == i: basic-resource / begin from: ./values-template.yaml#[basic-resource] indent: align ==
+  # == i: basic-resource / end ==
+
+  persistence:
+    enabled: false
+
+  # == i: grafana.ini / begin from: ./values-template.yaml#[grafana.ini] indent: align ==
+  # == i: grafana.ini / end ==
+
+  # == i: env-setup / begin from: ./values-template.yaml#[env-setup] indent: align ==
+  # == i: env-setup / end ==
+
+  # == i: other / begin from: ./values-template.yaml#[other] indent: align ==
+  # == i: other / end ==
