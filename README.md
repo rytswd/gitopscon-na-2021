@@ -1,10 +1,10 @@
 # GitOpsCon North America 2021
 
-## Are Your Declarative Configurations Human Friendly? Closer Look at Code Reviews with GitOps
-
 ![slide](/slide.png)
 
 > Date: 12th October, 2021\
+> Title: **Are Your Declarative Configurations Human Friendly? Closer Look at Code Reviews with GitOps**
+>
 > Presented by: [@rytswd](https://github.com/rytswd)\
 > Slide available at: https://tinyurl.com/gitopscon-na-2021-code-review
 
