@@ -11,6 +11,7 @@ commonArgs:
   - --log-level=info
   - --log-encoding=json
   - --enable-leader-election
+  - --new-common-flag
   # == export: common-args / end ==
 
 commonEnvs:
