@@ -23,8 +23,10 @@ spec:
   template:
     metadata:
       annotations:
+        # == imptr: prometheus-annotation / begin from: ./_deployment_template.yaml#[prometheus-annotation] indent: align ==
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
+        # == imptr: prometheus-annotation / end ==
       labels:
         app: kustomize-controller
     spec:

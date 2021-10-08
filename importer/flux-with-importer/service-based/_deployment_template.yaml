@@ -1,3 +1,10 @@
+commonAnnotation:
+  prometheus:
+    # == export: prometheus-annotation / begin ==
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+    # == export: prometheus-annotation / end ==
+
 commonArgs:
   # == export: common-args / begin ==
   - --watch-all-namespaces
