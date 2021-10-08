@@ -60,4 +60,8 @@ Merge Gatekeeper: https://github.com/upsidr/merge-gatekeeper
 
 Merge Gatekeeper adds extra functionality for managing multiple CI jobs in a single repository. With the GitOps setup, you can easily end up with many CI jobs in the same repository. This job makes sure all CI jobs are clean and successful.
 
+### UPSIDER
+
+Curious to know more about UPSIDER? Feel free to reach out to me on https://www.linkedin.com/in/ryotasawada/! 🥰
+
 <!-- == export: other / end == -->
