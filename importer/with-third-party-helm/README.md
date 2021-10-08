@@ -10,7 +10,7 @@ In this directory, the basic configuration is in `values-template.yaml`, and eac
 
 ## Template and Generated Files
 
-`prod.yaml`, `staging.yaml`, `qa.yaml`, and `dev.yaml` are all template files, and they have a special marker `== importer-skip-update ==`. This means running `importer update` on those files would not actually update the file in place. This means these files are only used as a template, and you can use these files as a source file for `importer generate`.
+`prod.yaml`, `staging.yaml`, `qa.yaml`, and `dev.yaml` are all template files, and they have a special marker `== importer-skip-update ==`. This means running `importer update` on those files would not actually update the file in place, and instead, you can use them as a source file for `importer generate`.
 
 This example uses these files with the following command:
 
@@ -18,4 +18,4 @@ This example uses these files with the following command:
 d=(prod qa staging dev); for i in "${d[@]}"; do importer generate importer/with-helm/$i.yaml -o importer/with-helm/grafana/values-$i.gen.yaml; done
 ```
 
-When the actual values.yaml file is lengthy, it can be cumbersome to check the difference for each file. So, insetad of checking each `importer generate` results, the template files can be used for the review.
+When the actual `values.yaml` file is lengthy, it can be cumbersome to check the difference for each environment. So, insetad of checking each `importer generate` results, the template files can be used for the quick review.
