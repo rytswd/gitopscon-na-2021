@@ -6,7 +6,10 @@
 > Title: **Are Your Declarative Configurations Human Friendly? Closer Look at Code Reviews with GitOps**
 >
 > Presented by: [@rytswd](https://github.com/rytswd)\
-> Slide available at: https://tinyurl.com/gitopscon-na-2021-code-review
+> Slide available at:
+>
+> - https://docs.google.com/presentation/d/161DA1vwwCXJeLtor-mfXhjn4ZcGFVcGqAmX475TNwk0/edit?usp=sharing
+> - [tinyurl](https://tinyurl.com/gitopscon-na-2021-code-review) is also available, but it points to slightly different version
 
 ## 🔎 References
 
