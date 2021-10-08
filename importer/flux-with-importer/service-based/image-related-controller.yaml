@@ -40,6 +40,7 @@ spec:
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        - --new-common-flag
         # == imptr: image-automation-common-args / end ==
         # == imptr: image-automation-common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
@@ -128,6 +129,7 @@ spec:
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        - --new-common-flag
         # == imptr: image-reflector-common-args / end ==
         # == imptr: image-reflector-common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
