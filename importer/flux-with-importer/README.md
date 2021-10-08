@@ -1,2 +1,2 @@
 - `original-install.yaml`: Taken directly from Flux
-- `service-based.gen.yaml`: Created by running the following command `importer generate importer/flux-with-importer/service-based/all-purged.yaml -o importer/flux-with-importer/service-based.gen.yaml`
+- `service-based.gen.yaml`: Created by running the following command `importer generate importer/flux-with-importer/service-based/all-template.yaml -o importer/flux-with-importer/service-based.gen.yaml`
