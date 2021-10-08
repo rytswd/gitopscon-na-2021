@@ -2,10 +2,11 @@
 
 ![slide](/slide.png)
 
-> Date: 12th October, 2021\
+> Date: 12th October, 2021
+>
 > Title: **Are Your Declarative Configurations Human Friendly? Closer Look at Code Reviews with GitOps**
 >
-> Presented by: [@rytswd](https://github.com/rytswd)\
+> Presented by: [@rytswd](https://github.com/rytswd)
 
 ## 📑 Slides
 
