@@ -8,7 +8,7 @@
 
 https://github.com/homeport/dyff
 
-#### Helm Diff Plugin
+### Helm Diff Plugin
 
 https://github.com/databus23/helm-diff
 
