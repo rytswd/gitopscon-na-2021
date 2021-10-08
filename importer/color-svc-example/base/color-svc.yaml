@@ -22,7 +22,7 @@ metadata:
   name: color-svc
 # == imptr: deployment-basic / end ==
 spec:
-  replicas: 1
+  replicas: 5
 
   selector:
     matchLabels:
@@ -39,16 +39,19 @@ spec:
         # == imptr: template-label-version / end ==
 
     spec:
-      # == imptr: basic-spec / begin from: ../template/deployment.yaml#[basic-spec] ==
+      # == i: pod-setup / begin from: ../template/deployment.yaml#[pod-setup] ==
       serviceAccountName: color-svc
+      # == i: pod-setup / end ==
+
       containers:
-        - image: docker.io/rytswd/color-svc:latest
+        - # == imptr: container-basic / begin from: ../template/deployment.yaml#[container-basic] ==
+          image: docker.io/rytswd/color-svc:latest
           name: color-svc
           command:
             - color-svc
           ports:
             - containerPort: 8800
-          # == imptr: basic-spec / end ==
+          # == imptr: container-basic / end ==
 
           env:
             # == imptr: standard-envs / begin from: ../template/deployment.yaml#[standard-envs] ==
@@ -78,3 +81,18 @@ spec:
               memory: 30Mi
           # == imptr: resource-requirements / end ==
 
+---
+# == imptr: k8s-pdb / begin from: ../template/pdb.yaml#1~ ==
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: color-svc
+spec:
+  minAvailable: 70%
+  selector:
+    matchLabels:
+      # == import: version-and-label / begin from: ./deployment.yaml#[version-and-label] indent: align ==
+      app.kubernetes.io/name: color-svc
+      app.kubernetes.io/version: v1
+      # == import: version-and-label / end ==
+# == imptr: k8s-pdb / end ==

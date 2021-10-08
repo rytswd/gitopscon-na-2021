@@ -1,0 +1,12 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: color-svc
+spec:
+  minAvailable: 70%
+  selector:
+    matchLabels:
+      # == import: version-and-label / begin from: ./deployment.yaml#[version-and-label] indent: align ==
+      app.kubernetes.io/name: color-svc
+      app.kubernetes.io/version: v1
+      # == import: version-and-label / end ==

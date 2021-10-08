@@ -1,0 +1,15 @@
+# == i: deployment-patch / begin from: ../template/patch.yaml#1~ ==
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-svc
+spec:
+  template:
+    spec:
+      containers:
+        - name: color-svc
+          env:
+            - name: DELAY_DURATION_MILLISECOND
+              value: "0"
+  # == i: deployment-patch / end ==
+  replicas: 3

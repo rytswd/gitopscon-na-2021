@@ -1,63 +1,32 @@
 ---
 # == imptr: k8s-svc / begin from: ../template/svc.yaml#1~ ==
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app.kubernetes.io/name: color-svc
-  name: color-svc
-spec:
-  ports:
-    - name: http
-      port: 8800
-      targetPort: 8800
-  selector:
-    app.kubernetes.io/name: color-svc
 # == imptr: k8s-svc / end ==
 ---
 # == imptr: deployment-basic / begin from: ../template/deployment.yaml#[resource-basic] ==
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: color-svc
 # == imptr: deployment-basic / end ==
 spec:
-  replicas: 1
+  replicas: 5
 
   selector:
     matchLabels:
       # == imptr: match-label-version / begin from: ../template/deployment.yaml#[version-and-label] indent: align ==
-      app.kubernetes.io/name: color-svc
-      app.kubernetes.io/version: v1
       # == imptr: match-label-version / end ==
   template:
     metadata:
       labels:
         # == imptr: template-label-version / begin from: ../template/deployment.yaml#[version-and-label] indent: align ==
-        app.kubernetes.io/name: color-svc
-        app.kubernetes.io/version: v1
         # == imptr: template-label-version / end ==
 
     spec:
-      # == imptr: basic-spec / begin from: ../template/deployment.yaml#[basic-spec] ==
-      serviceAccountName: color-svc
+      # == i: pod-setup / begin from: ../template/deployment.yaml#[pod-setup] ==
+      # == i: pod-setup / end ==
+
       containers:
-        - image: docker.io/rytswd/color-svc:latest
-          name: color-svc
-          command:
-            - color-svc
-          ports:
-            - containerPort: 8800
-          # == imptr: basic-spec / end ==
+        - # == imptr: container-basic / begin from: ../template/deployment.yaml#[container-basic] ==
+          # == imptr: container-basic / end ==
 
           env:
             # == imptr: standard-envs / begin from: ../template/deployment.yaml#[standard-envs] ==
-            - name: ENABLE_DELAY
-              value: "true"
-            - name: DELAY_DURATION_MILLISECOND
-              value: "500"
-            - name: ENABLE_CORS
-              value: "true"
             # == imptr: standard-envs / end ==
             - name: DISABLE_RED
               value: "true"
@@ -69,12 +38,8 @@ spec:
               value: "true"
 
           # == imptr: resource-requirements / begin from: ../template/deployment.yaml#[resource-requirements] ==
-          resources:
-            requests:
-              cpu: 10m
-              memory: 10Mi
-            limits:
-              cpu: 30m
-              memory: 30Mi
           # == imptr: resource-requirements / end ==
 
+---
+# == imptr: k8s-pdb / begin from: ../template/pdb.yaml#1~ ==
+# == imptr: k8s-pdb / end ==

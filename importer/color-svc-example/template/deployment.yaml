@@ -5,7 +5,7 @@ metadata:
   name: color-svc
 # == export: resource-basic / end ==
 spec:
-  replicas: 1
+  replicas: 5
 
   selector:
     matchLabels:
@@ -21,16 +21,19 @@ spec:
         app.kubernetes.io/version: v1
 
     spec:
-      # == export: basic-spec / begin ==
+      # == export: pod-setup / begin ==
       serviceAccountName: color-svc
+      # == export: pod-setup / end ==
+
       containers:
-        - image: docker.io/rytswd/color-svc:latest
+        - # == export: container-basic / begin ==
+          image: docker.io/rytswd/color-svc:latest
           name: color-svc
           command:
             - color-svc
           ports:
             - containerPort: 8800
-          # == export: basic-spec / end ==
+          # == export: container-basic / end ==
 
           env:
             # == export: standard-envs / begin ==
@@ -51,4 +54,3 @@ spec:
               cpu: 30m
               memory: 30Mi
           # == export: resource-requirements / end ==
-
