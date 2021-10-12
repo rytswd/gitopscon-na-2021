@@ -46,7 +46,7 @@ spec:
     spec:
       serviceAccountName: toolkit-alpine
       containers:
-        - image: docker.io/rytswd/toolkit-alpine:0.2.x # This does not exist
+        - image: docker.io/rytswd/toolkit-alpine:0.2.y # This does not exist
           name: toolkit-alpine
           command: ["/bin/sleep", "3650d"]
           resources:
