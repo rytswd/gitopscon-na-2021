@@ -56,6 +56,7 @@ spec:
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        - --new-common-flag
         # == imptr: common-args / end ==
         # == imptr: common-envs / begin from: ./_deployment_template.yaml#[common-envs] indent: align ==
         env:
