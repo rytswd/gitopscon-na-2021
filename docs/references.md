@@ -62,6 +62,6 @@ Merge Gatekeeper adds extra functionality for managing multiple CI jobs in a sin
 
 ### UPSIDER
 
-Curious to know more about UPSIDER? Feel free to reach out to me on https://www.linkedin.com/in/ryotasawada/! 🥰
+Curious to know more about UPSIDER? Feel free to reach out to me on [Twitter](https://twitter.com/rytswd) or [LinkedIn](https://www.linkedin.com/in/ryotasawada/)! 🥰
 
 <!-- == export: other / end == -->
